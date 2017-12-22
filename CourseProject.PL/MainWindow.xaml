@@ -3,10 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CourseProject.PL"
+        xmlns:local="clr-namespace:CourseProject.PL.Models"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local1="clr-namespace:CourseProject.PL.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="CourseProject" Height="350" MinHeight="350" MaxHeight="350" Width="525" MinWidth="525" MaxWidth="525">
+<Window.Resources>
+    <local1:ResultOfSearchConverter x:Key="SearchResultToString"></local1:ResultOfSearchConverter>
+</Window.Resources>
+<Window.DataContext>
+    <local:FoodViewModel></local:FoodViewModel>
+</Window.DataContext>
+<Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition Height="5*"/>
+    </Grid.RowDefinitions>
+    <DatePicker Name="datepicer" IsDropDownOpen="False" SelectedDateFormat="Short" Width="200" 
+ SelectedDate="{x:Static sys:DateTime.Now}" DisplayDateEnd="{x:Static sys:DateTime.Now}" FontSize="24" 
+                    DataContext="{Binding Date}"/>
+    <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <TextBox Margin="10" Height="25" Width="160" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <ComboBox Margin="10" Height="25" Width="195" ItemsSource="{Binding SearchResult, 
+                UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ResourceKey=SearchResultToString}}"
+                      SelectedItem="{Binding Selected.NameRS, UpdateSourceTrigger=PropertyChanged}">
+            </ComboBox>
+        <Button Margin="10" Height="25" Width="100">Добавить</Button>
+    </StackPanel>
+    <DataGrid Grid.Row="2" Margin="10">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Еда" Width="120" Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="Калории" Width="70" Binding="{Binding Calories}"/>
+        </DataGrid.Columns>
+        <DataGrid.RowDetailsTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="10">Изменить</Button>
+                    <Button Margin="10">Удалить</Button>
+                </StackPanel>
+            </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+    </DataGrid>
+</Grid>
 </Window>
