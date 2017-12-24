@@ -18,15 +18,15 @@ namespace CourseProject.PL.Commands
 
         public void Execute(Object parameter)
         {
-            //var vmAdd = parameter as FoodViewModel;
-            //string newElements = "bhjnk";
-            //if (vmAdd == null)
-            //    throw new ArgumentNullException("Модель представления не может быть null");
+            var vmAdd = parameter as FoodViewModel;
+            string newElements = "bhjnk";
+            if (vmAdd == null)
+                throw new ArgumentNullException("Модель представления не может быть null");
             //if (String.IsNullOrWhiteSpace(vmAdd.Selected))
-            //    throw new ArgumentNullException("Выбранная еда не может быть null");
-            //var prop = parameter.GetType().GetProperty("Foods", 
-            //    BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance);
-            //prop.SetValue(parameter, newElements);
+                throw new ArgumentNullException("Выбранная еда не может быть null");
+            var prop = parameter.GetType().GetProperty("Foods",
+                BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+            prop.SetValue(parameter, newElements);
         }
 
         public event EventHandler CanExecuteChanged;

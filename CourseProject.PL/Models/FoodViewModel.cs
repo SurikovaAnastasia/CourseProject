@@ -25,10 +25,7 @@ namespace CourseProject.PL.Models
             {
                 _search = value;
                 API api = new API();
-                if (Search != null)
-                {
-                    api.SearchQuery(_search); 
-                }
+                SearchResult = api.SearchQuery(_search);
                 DoPropertyChanged(nameof(SearchResult));
                 DoPropertyChanged(nameof(Search));
             }

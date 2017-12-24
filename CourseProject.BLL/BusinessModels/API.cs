@@ -25,31 +25,22 @@ namespace CourseProject.BLL.BusinessModels
              ResultOfSearch listItem = new ResultOfSearch();
              foreach (SearchResult result in response.Results)
              {
+                listItem.IdRS = result.Item.Id;
                 listItem.NameRS = result.Item.Name;
-                if (result.Item.NutritionFact_Calories == null)
-                {
-                    listItem.CaloriesRS = "chlen";
-                }
-                else
-                    listItem.CaloriesRS = result.Item.NutritionFact_Calories.Value.ToString();
+                listItem.BrandRS = result.Item.BrandName;
+                listItem.CaloriesRS = nutritionix.RetrieveItem(listItem.IdRS).NutritionFact_Calories;
                 list.Add(listItem);
              }
              return list;
-            //return response.Results;
         }
 
-        //public Item Retrieve(string id)
-        //{
-        //    var nutritionix = new NutritionixClient();
-        //    nutritionix.Initialize(APPID, APPKEY);
-
-        //    return nutritionix.RetrieveItem(id);
-        //}
     }
 
-    public class ResultOfSearch
+    public struct ResultOfSearch
     {
         public string NameRS;
-        public string CaloriesRS;
+        public decimal? CaloriesRS;
+        public string IdRS;
+        public string BrandRS;
     }
 }

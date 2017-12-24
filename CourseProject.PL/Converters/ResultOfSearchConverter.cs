@@ -14,21 +14,18 @@ namespace CourseProject.PL.Converters
     {
         public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
         {
-
-            try
+            if (value != null)
             {
                 ObservableCollection<ResultOfSearch> FoodList = (ObservableCollection<ResultOfSearch>)value;
-                ObservableCollection<string> FoodName = (ObservableCollection<string>)parameter;
+                ObservableCollection<string> FoodName = new ObservableCollection<string>();
                 foreach (ResultOfSearch Food in FoodList)
                 {
-                    FoodName.Add(Food.NameRS);
+                    FoodName.Add(Food.BrandRS + " " + Food.NameRS);
                 }
                 return FoodName;
             }
-            catch
-            {
-                return "Hmmmmmm";
-            }
+            else
+                throw new ArgumentNullException("Ничего не введено");
         }
 
         public Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)
