@@ -15,8 +15,6 @@ namespace CourseProject
         private ObservableCollection<ResultOfSearch> _searchResult;
         private ResultOfSearch _selected;
 
-        public int SelectedItem { get; set; }
-
         public DateTime Date
         {
             get { return _date; }
@@ -69,6 +67,7 @@ namespace CourseProject
         public ObservableCollection<Grid> Table { get; set; }
 
         public ICommand AddCom { get; set; }
+
         public FoodViewModel()
         {
             Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -80,6 +79,7 @@ namespace CourseProject
             a.CaloriesRS = 2;
             a.IdRS = "3";
             a.NameRS = "4";
+            SearchResult.Add(a);
             Selected = a;
 
             Date = DateTime.Today;
